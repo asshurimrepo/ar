@@ -10,7 +10,7 @@ namespace Heonozis\AR;
 
 class GetResponse {
 
-    public static function subscribe($name, $email) {
+    public static function subscribe($email, $name) {
         $campaignNeme = GetResponseSettings::getSettings('campaign_name');
         $api_url = 'http://api2.getresponse.com';
         $api_key = GetResponseSettings::getSettings('api_key');
