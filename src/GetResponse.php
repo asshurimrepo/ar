@@ -5,7 +5,7 @@
  * Date: 19.03.15
  * Time: 19:48
  */
-namespace Platon\AR;
+namespace Heonozis\AR;
 
 
 class GetResponse {

@@ -1,5 +1,5 @@
 <?php
-namespace Platon\AR;
+namespace Heonozis\AR;
 
 use Illuminate\Database\Eloquent\Model;
 use ViralStore\Settings;

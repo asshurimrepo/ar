@@ -1,6 +1,6 @@
 <?php
 
-namespace Platon\AR;
+namespace Heonozis\AR;
 
 use ArrayAccess;
 use Iterator;

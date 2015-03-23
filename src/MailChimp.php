@@ -1,6 +1,6 @@
 <?php
 
-namespace Platon\AR;
+namespace Heonozis\AR;
 
 /**
  * Super-simple, minimum abstraction MailChimp API v2 wrapper

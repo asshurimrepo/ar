@@ -5,10 +5,10 @@
  * Date: 19.03.15
  * Time: 14:03
  */
-namespace Platon\AR;
+namespace Heonozis\AR;
 
 use Illuminate\Support\Facades\Request;
-use Platon\AR\AWeberAPI;
+use Heonozis\AR\AWeberAPI;
 
 class Aweber {
 

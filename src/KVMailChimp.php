@@ -6,7 +6,7 @@
  * Time: 16:28
  */
 
-namespace Platon\AR;
+namespace Heonozis\AR;
 
 class KVMailChimp extends MailChimp{
 
