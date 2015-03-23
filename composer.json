@@ -1,0 +1,14 @@
+{
+    "name": "heonozis/ar",
+    "description": "Autoresponders package for Laravel 5",
+    "authors": [
+        {
+            "name": "Heonozis",
+            "email": "heonozis@mail.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+
+    }
+}
