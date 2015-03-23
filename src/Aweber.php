@@ -91,6 +91,18 @@ class Aweber {
             $lists_names[$list['name']] = $list['name'];
         }
 
-        return $lists_names;    }
+        return $lists_names;
+    }
 
+    public static function getSettings($name = null) {
+
+        AweberSettings::getSettings($name);
+
+    }
+
+    public static function saveSettings($array) {
+
+        AweberSettings::getSettings($array);
+
+    }
 }

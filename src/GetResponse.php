@@ -57,4 +57,16 @@ class GetResponse {
 
     }
 
+    public static function getSettings($name = null) {
+
+        GetResponseSettings::getSettings($name);
+
+    }
+
+    public static function saveSettings($array) {
+
+        GetResponseSettings::getSettings($array);
+
+    }
+
 }
