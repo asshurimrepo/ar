@@ -22,7 +22,7 @@ Authoresponders package for Laravel 5
 
 #####2. Add package to require section of composer.json:
 ```
-"require-dev": {
+"require": {
         ...
 	 	"heonozis/ar": "dev-master"
 	},
