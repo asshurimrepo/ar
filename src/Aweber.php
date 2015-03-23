@@ -8,7 +8,9 @@
 namespace Heonozis\AR;
 
 use Illuminate\Support\Facades\Request;
-use Heonozis\AR\AWeberAPI;
+
+require_once('Aweber/aweber.php');
+use AWeberAPI;
 
 class Aweber {
 

@@ -1,7 +1,135 @@
 <?php
 
-namespace Heonozis\AR;
-require_once('aweber.php');
+require_once('exceptions.php');
+require_once('oauth_adapter.php');
+require_once('oauth_application.php');
+require_once('aweber_response.php');
+require_once('aweber_collection.php');
+require_once('aweber_entry_data_array.php');
+require_once('aweber_entry.php');
+
+/**
+ * AWeberServiceProvider
+ *
+ * Provides specific AWeber information or implementing OAuth.
+ * @uses OAuthServiceProvider
+ * @package
+ * @version $id$
+ */
+class AWeberServiceProvider implements OAuthServiceProvider {
+
+    /**
+     * @var String Location for API calls
+     */
+    public $baseUri = 'https://api.aweber.com/1.0';
+
+    /**
+     * @var String Location to request an access token
+     */
+    public $accessTokenUrl = 'https://auth.aweber.com/1.0/oauth/access_token';
+
+    /**
+     * @var String Location to authorize an Application
+     */
+    public $authorizeUrl = 'https://auth.aweber.com/1.0/oauth/authorize';
+
+    /**
+     * @var String Location to request a request token
+     */
+    public $requestTokenUrl = 'https://auth.aweber.com/1.0/oauth/request_token';
+
+
+    public function getBaseUri() {
+        return $this->baseUri;
+    }
+
+    public function removeBaseUri($url) {
+        return str_replace($this->getBaseUri(), '', $url);
+    }
+
+    public function getAccessTokenUrl() {
+        return $this->accessTokenUrl;
+    }
+
+    public function getAuthorizeUrl() {
+        return $this->authorizeUrl;
+    }
+
+    public function getRequestTokenUrl() {
+        return $this->requestTokenUrl;
+    }
+
+    public function getAuthTokenFromUrl() { return ''; }
+    public function getUserData() { return ''; }
+
+}
+
+/**
+ * AWeberAPIBase
+ *
+ * Base object that all AWeberAPI objects inherit from.  Allows specific pieces
+ * of functionality to be shared across any object in the API, such as the
+ * ability to introspect the collections map.
+ *
+ * @package
+ * @version $id$
+ */
+class AWeberAPIBase {
+
+    /**
+     * Maintains data about what children collections a given object type
+     * contains.
+     */
+    static protected $_collectionMap = array(
+        'account'              => array('lists', 'integrations'),
+        'broadcast_campaign'   => array('links', 'messages', 'stats'),
+        'followup_campaign'    => array('links', 'messages', 'stats'),
+        'link'                 => array('clicks'),
+        'list'                 => array('campaigns', 'custom_fields', 'subscribers',
+                                        'web_forms', 'web_form_split_tests'),
+        'web_form'             => array(),
+        'web_form_split_test'  => array('components'),
+    );
+
+    /**
+     * loadFromUrl
+     *
+     * Creates an object, either collection or entry, based on the given
+     * URL.
+     *
+     * @param mixed $url    URL for this request
+     * @access public
+     * @return AWeberEntry or AWeberCollection
+     */
+    public function loadFromUrl($url) {
+        $data = $this->adapter->request('GET', $url);
+        return $this->readResponse($data, $url);
+    }
+
+    protected function _cleanUrl($url) {
+        return str_replace($this->adapter->app->getBaseUri(), '', $url);
+    }
+
+    /**
+     * readResponse
+     *
+     * Interprets a response, and creates the appropriate object from it.
+     * @param mixed $response   Data returned from a request to the AWeberAPI
+     * @param mixed $url        URL that this data was requested from
+     * @access protected
+     * @return mixed
+     */
+    protected function readResponse($response, $url) {
+        $this->adapter->parseAsError($response);
+        if (!empty($response['id'])) {
+            return new AWeberEntry($response, $url, $this->adapter);
+        } else if (array_key_exists('entries', $response)) {
+            return new AWeberCollection($response, $url, $this->adapter);
+        }
+        return false;
+    }
+}
+
 /**
  * AWeberAPI
  *
@@ -84,7 +212,7 @@ class AWeberAPI extends AWeberAPIBase {
         $requestToken = $this->user->requestToken;
         return (empty($requestToken)) ?
             $this->adapter->app->getAuthorizeUrl()
-            :
+                :
             $this->adapter->app->getAuthorizeUrl() . "?oauth_token={$this->user->requestToken}";
     }
 
@@ -161,3 +289,5 @@ class AWeberAPI extends AWeberAPIBase {
         return $this->adapter->getAccessToken();
     }
 }
+
+?>
