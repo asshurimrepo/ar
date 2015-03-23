@@ -2,7 +2,6 @@
 namespace Heonozis\AR;
 
 use Illuminate\Database\Eloquent\Model;
-use ViralStore\Settings;
 
 class MailChimpSettings extends Model
 {

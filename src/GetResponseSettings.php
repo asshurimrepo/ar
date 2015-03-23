@@ -3,7 +3,6 @@
 namespace Heonozis\AR;
 
 use Illuminate\Database\Eloquent\Model;
-use ViralStore\Settings;
 
 class GetResponseSettings extends Model
 {
