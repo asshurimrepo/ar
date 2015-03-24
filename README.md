@@ -28,13 +28,7 @@ Authoresponders package for Laravel 5
 	},
 ```
 
-#####3. Update composer dependencies:
-
-```
-$ composer update
-```
-
-#####4. Add ArServiceProvider to config/app.php:
+#####3. Add ArServiceProvider to config/app.php:
 
 ```
     'providers' => [
@@ -42,6 +36,14 @@ $ composer update
         'Heonozis\AR\ArServiceProvider',
         ]
 ```
+
+#####4. Update composer dependencies:
+
+```
+$ composer update
+```
+
+
 
 #####5. Publish migrations:
 
