@@ -8,8 +8,18 @@
 
 namespace Heonozis\AR;
 
+/**
+ * Class MailChimp
+ * @package Heonozis\AR
+ */
 class MailChimp extends MailChimpAPI{
 
+    /**
+     * Subscribe user
+     *
+     * @param $email
+     * @param $name
+     */
     public static function subscribe($email, $name) {
 
         try {
@@ -33,11 +43,17 @@ class MailChimp extends MailChimpAPI{
 
 
         } catch(\Exception $e) {
-            throw $e;
+
         }
 
     }
 
+    /**
+     * Returns list of subscribers lists of account
+     *
+     * @return array
+     * @throws \Exception
+     */
     public static function lists(){
 
         try {
@@ -63,12 +79,22 @@ class MailChimp extends MailChimpAPI{
 
     }
 
+    /**
+     * Get MailChimp settings from DB
+     *
+     * You can specify name of settings (if null - all settings)
+     * @param null $name
+     */
     public static function getSettings($name = null) {
 
         MailChimpSettings::getSettings($name);
 
     }
 
+    /**
+     * Save array of settings to DB
+     * @param $array
+     */
     public static function saveSettings($array) {
 
         MailChimpSettings::getSettings($array);

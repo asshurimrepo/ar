@@ -8,11 +8,22 @@
 namespace Heonozis\AR;
 
 require_once('Aweber/aweber.php');
+
 use AWeberAPI;
 
+/**
+ * Class Aweber
+ * @package Heonozis\AR
+ */
 class Aweber {
 
-    //get authorize by oAuth token
+    /**
+     * Get authorize by token and verifier
+     *
+     * @param $oauth_token
+     * @param $oauth_verifier
+     * @return \stdClass
+     */
     public static function getAuthorize($oauth_token, $oauth_verifier) {
 
         $customer_key = AweberSettings::getSettings('customer_key');
@@ -34,7 +45,12 @@ class Aweber {
 
     }
 
-    //subscribe user
+    /**
+     * Subscribe user
+     *
+     * @param $email
+     * @param $name
+     */
     public static function subscribe($email, $name) {
 
         try {
@@ -65,13 +81,25 @@ class Aweber {
     }
 
     //make instance of AWeber
+    /**
+     * Make instance of AWeberAPI
+     *
+     * @param $customer_key
+     * @param $customer_secret
+     * @return AWeberAPI
+     */
     public static function make($customer_key, $customer_secret) {
 
         return $aweber = new AWeberAPI($customer_key, $customer_secret);
 
     }
 
-    //get lists
+    /**
+     * Returns list of subscribers lists of account
+     *
+     * @return array
+     * @throws \Exception
+     */
     public static function lists(){
 
         $customer_key = AweberSettings::getSettings('customer_key');
@@ -94,12 +122,23 @@ class Aweber {
         return $lists_names;
     }
 
+
+    /**
+     * Get AWeber settings from DB
+     *
+     * You can specify name of settings (if null - all settings)
+     * @param null $name
+     */
     public static function getSettings($name = null) {
 
         AweberSettings::getSettings($name);
 
     }
 
+    /**
+     * Save array of settings to DB
+     * @param $array
+     */
     public static function saveSettings($array) {
 
         AweberSettings::getSettings($array);
