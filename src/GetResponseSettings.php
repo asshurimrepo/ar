@@ -10,6 +10,8 @@ class GetResponseSettings extends Model
 
     protected $table = 'ar_getresponse_settings';
 
+    protected $fillable = array('key', 'value');
+
     public static function campaignId() {
         $campaignName = self::getSettings('campaign_name');
 

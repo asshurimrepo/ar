@@ -8,4 +8,6 @@ class AweberSettings extends Model
     use Settings;
 
     protected $table = 'ar_aweber_settings';
+
+    protected $fillable = array('key', 'value');
 }
