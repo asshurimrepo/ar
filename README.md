@@ -95,6 +95,10 @@ You can ``set`` settings via ``Aweber::saveSettings($array)`` function,
 where ``$array = array('customer_key' => "CUSTOMER KEY",'customer_secret' => "CUSTOMER SECRET",)``
 
 You can ``get`` array of all settings via ``Aweeber::getSettings()`` function, or get only one field via ``Aweeber::getSettings($field_name)``
+
+##### Note:
+You can see configuration processes in ``src/example/ExampleController.php``
+
 ##Usage (Only after full configuration):
 ##### MailChimp:
 * Subscribe User  ```MailChimp::subscribe($email, $name)```
