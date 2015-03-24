@@ -12,7 +12,8 @@ namespace Heonozis\AR;
  * Class MailChimp
  * @package Heonozis\AR
  */
-class MailChimp extends MailChimpAPI{
+class MailChimp extends MailChimpAPI
+{
 
     /**
      * Subscribe user
@@ -20,7 +21,8 @@ class MailChimp extends MailChimpAPI{
      * @param $email
      * @param $name
      */
-    public static function subscribe($email, $name) {
+    public static function subscribe($email, $name)
+    {
 
         try {
             $api_key = MailChimpSettings::getSettings('api_key');
@@ -42,7 +44,9 @@ class MailChimp extends MailChimpAPI{
             ));
 
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
+
+            return false;
 
         }
 
@@ -54,11 +58,11 @@ class MailChimp extends MailChimpAPI{
      * @return array
      * @throws \Exception
      */
-    public static function lists(){
+    public static function lists()
+    {
 
         try {
             $api_key = MailChimpSettings::getSettings('api_key');
-            $list_name = MailChimpSettings::getSettings('list_name');
 
             $mc = new self($api_key);
 
@@ -66,15 +70,15 @@ class MailChimp extends MailChimpAPI{
 
             $lists_names = array();
 
-            foreach($lists['data'] as $list) {
+            foreach ($lists['data'] as $list) {
                 $lists_names[$list['name']] = $list['name'];
             }
 
             return $lists_names;
 
+        } catch (\Exception $e) {
 
-        } catch(\Exception $e) {
-            throw $e;
+            return false;
         }
 
     }
@@ -85,7 +89,8 @@ class MailChimp extends MailChimpAPI{
      * You can specify name of settings (if null - all settings)
      * @param null $name
      */
-    public static function getSettings($name = null) {
+    public static function getSettings($name = null)
+    {
 
         MailChimpSettings::getSettings($name);
 
@@ -95,7 +100,8 @@ class MailChimp extends MailChimpAPI{
      * Save array of settings to DB
      * @param $array
      */
-    public static function saveSettings($array) {
+    public static function saveSettings($array)
+    {
 
         MailChimpSettings::getSettings($array);
 

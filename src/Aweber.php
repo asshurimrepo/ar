@@ -26,22 +26,27 @@ class Aweber {
      */
     public static function getAuthorize($oauth_token, $oauth_verifier) {
 
-        $customer_key = AweberSettings::getSettings('customer_key');
-        $customer_secret = AweberSettings::getSettings('customer_secret');
-        $aweber = Aweber::make($customer_key, $customer_secret);
+        try {
+            $customer_key = AweberSettings::getSettings('customer_key');
+            $customer_secret = AweberSettings::getSettings('customer_secret');
+            $aweber = Aweber::make($customer_key, $customer_secret);
 
-        $aweber->user->requestToken = $oauth_token;
-        $aweber->user->verifier = $oauth_verifier;
+            $aweber->user->requestToken = $oauth_token;
+            $aweber->user->verifier = $oauth_verifier;
 
-        $aweber->user->tokenSecret = $_COOKIE['request_secret'];
+            $aweber->user->tokenSecret = $_COOKIE['request_secret'];
 
-        list($accessToken, $accessTokenSecret) = $aweber->getAccessToken();
+            list($accessToken, $accessTokenSecret) = $aweber->getAccessToken();
 
-        $access = new \stdClass();
-        $access->token = $accessToken;
-        $access->secret = $accessTokenSecret;
+            $access = new \stdClass();
+            $access->token = $accessToken;
+            $access->secret = $accessTokenSecret;
 
-        return $access;
+            return $access;
+
+        } catch(\Exception $e) {
+            return false;
+        }
 
     }
 
@@ -76,6 +81,8 @@ class Aweber {
 
         } catch(\Exception $e) {
 
+            return false;
+
         }
 
     }
@@ -102,24 +109,28 @@ class Aweber {
      */
     public static function lists(){
 
-        $customer_key = AweberSettings::getSettings('customer_key');
-        $customer_secret = AweberSettings::getSettings('customer_secret');
-        $access_key = AweberSettings::getSettings('access_key');
-        $access_secret = AweberSettings::getSettings('access_secret');
+        try {
+            $customer_key = AweberSettings::getSettings('customer_key');
+            $customer_secret = AweberSettings::getSettings('customer_secret');
+            $access_key = AweberSettings::getSettings('access_key');
+            $access_secret = AweberSettings::getSettings('access_secret');
 
-        $aweber = self::make($customer_key, $customer_secret);
+            $aweber = self::make($customer_key, $customer_secret);
 
-        $account = $aweber->getAccount($access_key, $access_secret);
+            $account = $aweber->getAccount($access_key, $access_secret);
 
-        $lists = $account->lists->data['entries'];
+            $lists = $account->lists->data['entries'];
 
-        $lists_names = array();
+            $lists_names = array();
 
-        foreach($lists as $list) {
-            $lists_names[$list['name']] = $list['name'];
+            foreach ($lists as $list) {
+                $lists_names[$list['name']] = $list['name'];
+            }
+
+            return $lists_names;
+        } catch (\Exception $e){
+            return false;
         }
-
-        return $lists_names;
     }
 
 
