@@ -55,6 +55,7 @@ class Aweber {
      *
      * @param $email
      * @param $name
+     * @return bool
      */
     public static function subscribe($email, $name) {
 
@@ -80,6 +81,9 @@ class Aweber {
             ));
 
         } catch(\Exception $e) {
+
+            //uncoment to enable error messages
+            //throw $e;
 
             return false;
 
@@ -129,7 +133,12 @@ class Aweber {
 
             return $lists_names;
         } catch (\Exception $e){
+
+            //uncoment to enable error messages
+            //throw $e;
+
             return false;
+
         }
     }
 

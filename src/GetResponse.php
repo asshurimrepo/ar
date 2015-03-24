@@ -52,6 +52,9 @@ class GetResponse
 
         } catch (\Exception $e) {
 
+            //uncoment to enable error messages
+            //throw $e;
+
             return false;
 
         }
@@ -86,6 +89,9 @@ class GetResponse
 
             }
         } catch (\Exception $e) {
+
+            //uncoment to enable error messages
+            //throw $e;
 
             return false;
 

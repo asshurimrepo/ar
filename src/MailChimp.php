@@ -20,6 +20,7 @@ class MailChimp extends MailChimpAPI
      *
      * @param $email
      * @param $name
+     * @return bool
      */
     public static function subscribe($email, $name)
     {
@@ -45,6 +46,9 @@ class MailChimp extends MailChimpAPI
 
 
         } catch (\Exception $e) {
+
+            //uncoment to enable error messages
+            //throw $e;
 
             return false;
 
@@ -77,6 +81,9 @@ class MailChimp extends MailChimpAPI
             return $lists_names;
 
         } catch (\Exception $e) {
+
+            //uncoment to enable error messages
+            //throw $e;
 
             return false;
         }
