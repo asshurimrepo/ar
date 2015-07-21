@@ -29,6 +29,9 @@ class MailChimp extends MailChimpAPI
             $api_key = MailChimpSettings::getSettings('api_key');
             $list_name = MailChimpSettings::getSettings('list_name');
 
+	if($list_name == ''){
+	return 1;	
+}
             $mc = new self($api_key);
 
             $list_id = $mc->call('lists/list', array(
@@ -41,11 +44,12 @@ class MailChimp extends MailChimpAPI
                 'merge_vars' => array(
                     'FNAME' => $name
                 ),
-                'send_welcome' => false
+                'send_welcome' => false,
+		'double_optin' => false
             ));
 
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
             //uncoment to enable error messages
             //throw $e;
@@ -80,7 +84,7 @@ class MailChimp extends MailChimpAPI
 
             return $lists_names;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
             //uncoment to enable error messages
             //throw $e;
@@ -95,11 +99,12 @@ class MailChimp extends MailChimpAPI
      *
      * You can specify name of settings (if null - all settings)
      * @param null $name
+     * @return array
      */
     public static function getSettings($name = null)
     {
 
-        MailChimpSettings::getSettings($name);
+        return MailChimpSettings::getSettings($name);
 
     }
 

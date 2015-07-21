@@ -50,14 +50,15 @@ class GetResponse
             ));
 
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
             //uncoment to enable error messages
             //throw $e;
-
+	    \Log::error($e->getMessage());
             return false;
 
         }
+	\Log::info('Subscribed to MaiChimp: '.json_encode($ret));
     }
 
     /**
@@ -88,7 +89,7 @@ class GetResponse
                     return $campaigns_names;
 
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
             //uncoment to enable error messages
             //throw $e;
@@ -104,11 +105,12 @@ class GetResponse
      *
      * You can specify name of settings (if null - all settings)
      * @param null $name
+     * @return array
      */
     public static function getSettings($name = null)
     {
 
-        GetResponseSettings::getSettings($name);
+       return GetResponseSettings::getSettings($name);
 
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-use ArrayAccess;
-use Countable;
-use Iterator;
+//use ArrayAccess;
+//use Countable;
+//use Iterator;
 
 class AWeberEntryDataArray implements ArrayAccess, Countable, Iterator  {
     private $counter = 0;

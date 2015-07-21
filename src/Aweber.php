@@ -44,7 +44,7 @@ class Aweber {
 
             return $access;
 
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             return false;
         }
 
@@ -80,7 +80,7 @@ class Aweber {
                 'email' => $email
             ));
 
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
 
             //uncoment to enable error messages
             //throw $e;
@@ -132,7 +132,7 @@ class Aweber {
             }
 
             return $lists_names;
-        } catch (\Exception $e){
+        } catch (Exception $e){
 
             //uncoment to enable error messages
             //throw $e;
@@ -148,10 +148,11 @@ class Aweber {
      *
      * You can specify name of settings (if null - all settings)
      * @param null $name
+     * @return array
      */
     public static function getSettings($name = null) {
 
-        AweberSettings::getSettings($name);
+        return AweberSettings::getSettings($name);
 
     }
 
