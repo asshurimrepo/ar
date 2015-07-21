@@ -46,7 +46,9 @@ class GetResponse
             $ret = $client->add_contact($api_key, array(
                 'campaign' => $campaignID,
                 'name' => $name,
-                'email' => $email
+                'email' => $email,
+                'cycle_day' => 0
+
             ));
 
 
