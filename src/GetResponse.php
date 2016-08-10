@@ -68,12 +68,12 @@ class GetResponse
      *
      * @return array
      */
-    public static function campaigns()
+    public static function campaigns($key = null)
     {
         try {
             $api_url = 'http://api2.getresponse.com';
             $client = new jsonRPCClient($api_url);
-            $api_key = GetResponseSettings::getSettings('api_key');
+            $api_key = $key ?: GetResponseSettings::getSettings('api_key');
 
 
             $campaigns = (array)$client->get_campaigns($api_key);
@@ -124,7 +124,7 @@ class GetResponse
     public static function saveSettings($array)
     {
 
-        GetResponseSettings::getSettings($array);
+        GetResponseSettings::saveSettings($array);
 
     }
 
