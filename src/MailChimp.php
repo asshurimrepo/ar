@@ -66,11 +66,11 @@ class MailChimp extends MailChimpAPI
      * @return array
      * @throws \Exception
      */
-    public static function lists()
+    public static function lists($key = null)
     {
 
         try {
-            $api_key = MailChimpSettings::getSettings('api_key');
+            $api_key = $key ?: MailChimpSettings::getSettings('api_key');
 
             $mc = new self($api_key);
 
@@ -115,7 +115,7 @@ class MailChimp extends MailChimpAPI
     public static function saveSettings($array)
     {
 
-        MailChimpSettings::getSettings($array);
+        MailChimpSettings::saveSettings($array);
 
     }
 
