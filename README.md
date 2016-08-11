@@ -15,7 +15,7 @@ Authoresponders package for Laravel 5
 	"repositories": [
 	  {
 		"type": "vcs",
-		"url": "https://github.com/Heonozis/ar.git"
+		"url": "https://github.com/asshurimrepo/ar.git"
 	  }
 	],
 ```
