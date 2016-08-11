@@ -7,7 +7,7 @@
  */
 namespace Heonozis\AR;
 
-require_once('Aweber/aweber.php');
+// require_once('Aweber/aweber.php');
 
 use AWeberAPI;
 
@@ -111,15 +111,15 @@ class Aweber {
      * @return array
      * @throws \Exception
      */
-    public static function lists(){
+    public static function lists($aweber, $access_key, $access_secret){
 
         try {
-            $customer_key = AweberSettings::getSettings('customer_key');
+           /* $customer_key = AweberSettings::getSettings('customer_key');
             $customer_secret = AweberSettings::getSettings('customer_secret');
             $access_key = AweberSettings::getSettings('access_key');
-            $access_secret = AweberSettings::getSettings('access_secret');
+            $access_secret = AweberSettings::getSettings('access_secret');*/
 
-            $aweber = self::make($customer_key, $customer_secret);
+            // $aweber = self::make($customer_key, $customer_secret);
 
             $account = $aweber->getAccount($access_key, $access_secret);
 
