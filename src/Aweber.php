@@ -57,17 +57,17 @@ class Aweber {
      * @param $name
      * @return bool
      */
-    public static function subscribe($email, $name) {
+    public static function subscribe($aweber, $email, $name, $list_name, $access_key, $access_secret) {
 
         try {
 
-            $customer_key = AweberSettings::getSettings('customer_key');
-            $customer_secret = AweberSettings::getSettings('customer_secret');
-            $access_key = AweberSettings::getSettings('access_key');
-            $access_secret = AweberSettings::getSettings('access_secret');
-            $list_name = AweberSettings::getSettings('list_name');
+            // $customer_key = AweberSettings::getSettings('customer_key');
+            // $customer_secret = AweberSettings::getSettings('customer_secret');
+            // $access_key = AweberSettings::getSettings('access_key');
+            // $access_secret = AweberSettings::getSettings('access_secret');
+            // $list_name = AweberSettings::getSettings('list_name');
 
-            $aweber = self::make($customer_key, $customer_secret);
+            // $aweber = self::make($customer_key, $customer_secret);
 
             $account = $aweber->getAccount($access_key, $access_secret);
 
