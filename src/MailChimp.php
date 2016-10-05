@@ -22,16 +22,17 @@ class MailChimp extends MailChimpAPI
      * @param $name
      * @return bool
      */
-    public static function subscribe($email, $name)
+    public static function subscribe($email, $name, $list_name, $key)
     {
 
         try {
-            $api_key = MailChimpSettings::getSettings('api_key');
-            $list_name = MailChimpSettings::getSettings('list_name');
+            
+            $api_key = $key ?: MailChimpSettings::getSettings('api_key');
+            $list_name = $list_name ?: MailChimpSettings::getSettings('list_name');
 
-	if($list_name == ''){
-	return 1;	
-}
+         if($list_name == ''){
+            return 1; 
+            }
             $mc = new self($api_key);
 
             $list_id = $mc->call('lists/list', array(
@@ -45,7 +46,7 @@ class MailChimp extends MailChimpAPI
                     'FNAME' => $name
                 ),
                 'send_welcome' => false,
-		'double_optin' => false
+          'double_optin' => false
             ));
 
 
