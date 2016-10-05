@@ -26,12 +26,12 @@ class GetResponse
      * @return bool
      * @throws HttpException
      */
-    public static function subscribe($email, $name)
+    public static function subscribe($email, $name, $list_name, $key)
     {
         try {
-            $campaignNeme = GetResponseSettings::getSettings('campaign_name');
+            $campaignNeme = $list_name ?: GetResponseSettings::getSettings('campaign_name');
             $api_url = 'http://api2.getresponse.com';
-            $api_key = GetResponseSettings::getSettings('api_key');
+            $api_key = $key ?: GetResponseSettings::getSettings('api_key');
 
             $client = new jsonRPCClient($api_url);
 
@@ -56,11 +56,11 @@ class GetResponse
 
             //uncoment to enable error messages
             //throw $e;
-	    \Log::error($e->getMessage());
+     \Log::error($e->getMessage());
             return false;
 
         }
-	\Log::info('Subscribed to MaiChimp: '.json_encode($ret));
+ \Log::info('Subscribed to MaiChimp: '.json_encode($ret));
     }
 
     /**
